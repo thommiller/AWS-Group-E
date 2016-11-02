@@ -45,6 +45,6 @@ gsdk = {
     },
 }
 
-$('button[type="button"]').click(function(e){
+$('button[id="rowDelete"]').click(function(e){
    $(this).closest('tr').remove()
 })
