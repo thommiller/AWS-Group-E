@@ -247,6 +247,76 @@ ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permiss
 
 
 --
+-- Name: citations_citation; Type: TABLE; Schema: public; Owner: citationmanager
+--
+
+CREATE TABLE citations_citation (
+    id integer NOT NULL,
+    title character varying(256) NOT NULL,
+    link character varying(1024) NOT NULL,
+    note character varying(65536) NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE citations_citation OWNER TO citationmanager;
+
+--
+-- Name: citations_citation_id_seq; Type: SEQUENCE; Schema: public; Owner: citationmanager
+--
+
+CREATE SEQUENCE citations_citation_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE citations_citation_id_seq OWNER TO citationmanager;
+
+--
+-- Name: citations_citation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: citationmanager
+--
+
+ALTER SEQUENCE citations_citation_id_seq OWNED BY citations_citation.id;
+
+
+--
+-- Name: citations_user; Type: TABLE; Schema: public; Owner: citationmanager
+--
+
+CREATE TABLE citations_user (
+    id integer NOT NULL,
+    name character varying(32) NOT NULL,
+    "passwordHash" character varying(1024) NOT NULL
+);
+
+
+ALTER TABLE citations_user OWNER TO citationmanager;
+
+--
+-- Name: citations_user_id_seq; Type: SEQUENCE; Schema: public; Owner: citationmanager
+--
+
+CREATE SEQUENCE citations_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE citations_user_id_seq OWNER TO citationmanager;
+
+--
+-- Name: citations_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: citationmanager
+--
+
+ALTER SEQUENCE citations_user_id_seq OWNED BY citations_user.id;
+
+
+--
 -- Name: django_admin_log; Type: TABLE; Schema: public; Owner: citationmanager
 --
 
@@ -411,6 +481,20 @@ ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: citations_citation id; Type: DEFAULT; Schema: public; Owner: citationmanager
+--
+
+ALTER TABLE ONLY citations_citation ALTER COLUMN id SET DEFAULT nextval('citations_citation_id_seq'::regclass);
+
+
+--
+-- Name: citations_user id; Type: DEFAULT; Schema: public; Owner: citationmanager
+--
+
+ALTER TABLE ONLY citations_user ALTER COLUMN id SET DEFAULT nextval('citations_user_id_seq'::regclass);
+
+
+--
 -- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: citationmanager
 --
 
@@ -484,6 +568,12 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 16	Can add session	6	add_session
 17	Can change session	6	change_session
 18	Can delete session	6	delete_session
+19	Can add user	7	add_user
+20	Can change user	7	change_user
+21	Can delete user	7	delete_user
+22	Can add citation	8	add_citation
+23	Can change citation	8	change_citation
+24	Can delete citation	8	delete_citation
 \.
 
 
@@ -491,7 +581,7 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: citationmanager
 --
 
-SELECT pg_catalog.setval('auth_permission_id_seq', 18, true);
+SELECT pg_catalog.setval('auth_permission_id_seq', 24, true);
 
 
 --
@@ -540,6 +630,36 @@ SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
 
 
 --
+-- Data for Name: citations_citation; Type: TABLE DATA; Schema: public; Owner: citationmanager
+--
+
+COPY citations_citation (id, title, link, note, user_id) FROM stdin;
+\.
+
+
+--
+-- Name: citations_citation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: citationmanager
+--
+
+SELECT pg_catalog.setval('citations_citation_id_seq', 1, false);
+
+
+--
+-- Data for Name: citations_user; Type: TABLE DATA; Schema: public; Owner: citationmanager
+--
+
+COPY citations_user (id, name, "passwordHash") FROM stdin;
+\.
+
+
+--
+-- Name: citations_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: citationmanager
+--
+
+SELECT pg_catalog.setval('citations_user_id_seq', 1, false);
+
+
+--
 -- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: citationmanager
 --
 
@@ -565,6 +685,8 @@ COPY django_content_type (id, app_label, model) FROM stdin;
 4	auth	user
 5	contenttypes	contenttype
 6	sessions	session
+7	citations	user
+8	citations	citation
 \.
 
 
@@ -572,7 +694,7 @@ COPY django_content_type (id, app_label, model) FROM stdin;
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: citationmanager
 --
 
-SELECT pg_catalog.setval('django_content_type_id_seq', 6, true);
+SELECT pg_catalog.setval('django_content_type_id_seq', 8, true);
 
 
 --
@@ -592,6 +714,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 10	auth	0006_require_contenttypes_0002	2016-11-02 13:22:47.17979+00
 11	auth	0007_alter_validators_add_error_messages	2016-11-02 13:22:47.217749+00
 12	sessions	0001_initial	2016-11-02 13:22:47.440609+00
+13	citations	0001_initial	2016-11-02 13:52:36.438798+00
 \.
 
 
@@ -599,7 +722,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: citationmanager
 --
 
-SELECT pg_catalog.setval('django_migrations_id_seq', 12, true);
+SELECT pg_catalog.setval('django_migrations_id_seq', 13, true);
 
 
 --
@@ -707,6 +830,22 @@ ALTER TABLE ONLY auth_user
 
 
 --
+-- Name: citations_citation citations_citation_pkey; Type: CONSTRAINT; Schema: public; Owner: citationmanager
+--
+
+ALTER TABLE ONLY citations_citation
+    ADD CONSTRAINT citations_citation_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: citations_user citations_user_pkey; Type: CONSTRAINT; Schema: public; Owner: citationmanager
+--
+
+ALTER TABLE ONLY citations_user
+    ADD CONSTRAINT citations_user_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: citationmanager
 --
 
@@ -810,6 +949,13 @@ CREATE INDEX auth_user_username_6821ab7c_like ON auth_user USING btree (username
 
 
 --
+-- Name: citations_citation_e8701ad4; Type: INDEX; Schema: public; Owner: citationmanager
+--
+
+CREATE INDEX citations_citation_e8701ad4 ON citations_citation USING btree (user_id);
+
+
+--
 -- Name: django_admin_log_417f1b1c; Type: INDEX; Schema: public; Owner: citationmanager
 --
 
@@ -891,6 +1037,14 @@ ALTER TABLE ONLY auth_user_user_permissions
 
 ALTER TABLE ONLY auth_user_user_permissions
     ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: citations_citation citations_citation_user_id_6392997b_fk_citations_user_id; Type: FK CONSTRAINT; Schema: public; Owner: citationmanager
+--
+
+ALTER TABLE ONLY citations_citation
+    ADD CONSTRAINT citations_citation_user_id_6392997b_fk_citations_user_id FOREIGN KEY (user_id) REFERENCES citations_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
