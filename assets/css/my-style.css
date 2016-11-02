@@ -177,10 +177,30 @@
     }
 }
 
-.citationLink {
-    max-width:50%;
+@media (max-width: 768px) {
+  .table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    border: 1px solid #dddddd;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
-.my-table {
-    table-layout: fixed;
+
+
+@media (min-width: 768px){
+  .link-cell {
+    max-width:150px
+  }
+
+  .wordwrap {
+     white-space: pre-wrap;      /* CSS3 */
+     white-space: -moz-pre-wrap; /* Firefox */
+     white-space: -pre-wrap;     /* Opera <7 */
+     white-space: -o-pre-wrap;   /* Opera 7 */
+     word-wrap: break-word;      /* IE */
+  }
 }
