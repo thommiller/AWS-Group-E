@@ -9,6 +9,8 @@ Require all granted
 Require all granted
 </Directory>
 
+DirectoryIndex /assets/signup-page.html
+
 WSGIScriptAlias / /djangoBackend/djangoBackend/wsgi.py
 
 <Directory /djangoBackend/djangoBackend/wsgi.py>
