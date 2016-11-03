@@ -55,7 +55,7 @@ ROOT_URLCONF = 'djangoBackend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,14 +94,29 @@ if 'RDS_DB_NAME' in os.environ:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'citationmanager',
-            'USER': 'citationmanager',
-            'PASSWORD': 'citationManager',
-            'HOST': '127.0.0.1',
-            'PORT': '5432',
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+    # DATABASES = {
+        # 'default': {
+            # 'ENGINE': 'django.db.backends.postgresql',
+            # 'NAME': 'citationmanager',
+            # 'USER': 'citationmanager',
+            # 'PASSWORD': 'citationManager',
+            # 'HOST': '127.0.0.1',
+            # 'PORT': '5432',
+        # }
+    # }
+    # DATABASES = {
+        # 'default': {
+            # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            # 'NAME': 'citations',
+            # 'USER': 'mehul',
+            # 'PASSWORD': 'test123',
+            # 'HOST': '127.0.0.1',
+            # 'PORT': '5432',
+    # }
 
 
 # Password validation
@@ -142,6 +157,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "..", "www"),
     os.path.join(BASE_DIR, "..", "assets"),
