@@ -25,7 +25,7 @@ SECRET_KEY = 'osxkfe2=ub(u7by582+g96pobzptq+(_oap%84o416$om&6k*s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['citation-manager.eu-west-1.elasticbeanstalk.com', 'localhost']
 
 
 # Application definition
