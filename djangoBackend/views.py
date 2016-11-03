@@ -10,10 +10,9 @@ def login_data(request):
 		password = request.POST.get('password')
 		user = authenticate(username=username, password=password)
 		if user is not None:
-			print(user)
-			return HttpResponseRedirect('citations')
+			login(request, user)
+			return HttpResponseRedirect('/citations')
 		else:
-			print("authentication failed")
 			return HttpResponseRedirect('/')        
 
 def registration_data(request):
@@ -28,6 +27,9 @@ def registration_data(request):
         user = User.objects.create_user(username, email, password, first_name=firstname, last_name=lastname)
         return HttpResponseRedirect('/')
 
+@login_required
+def citations(request):
+    return render(request, 'citations.html', {'obj': models.Citation.objects.all()})
 # def citations(request):
 		# print('citations')
 		# if request.user.is_authenticated(): print('auth')

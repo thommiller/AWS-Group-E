@@ -12,6 +12,3 @@ def index(request):
 
 #def citations(request): #view to display all citations in db
 #    return render(request, 'citations.html', {'obj': models.Citation.objects.all()})
-@login_required
-def citations(request):
-    return render(request, 'citations.html', {'obj': models.Citation.objects.all()})
