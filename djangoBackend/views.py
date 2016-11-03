@@ -11,7 +11,7 @@ def login_data(request):
 		user = authenticate(username= username, password=password)
 		if user is not None:
 			print(user)
-			return HttpResponseRedirect('citation')
+			return HttpResponseRedirect('citations')
 		else:
 			print("authentication failed")
 			return HttpResponseRedirect('/')        
@@ -37,8 +37,3 @@ def citations(request):
 def logout_view(request):
 	logout(request)
 	return HttpResponseRedirect('/')
-
-
-
-
-
