@@ -1,5 +1,4 @@
 __pycache__/
-djangoBackend/static/
 *.pyc
 djangoBackend/db.sqlite3
 staticFiles/
