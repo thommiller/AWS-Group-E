@@ -16,12 +16,14 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
-from views import login_data
+from views import login_data, registration_data, citations, logout_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     #url(r'^$', TemplateView.as_view(template_name = "login.html"), name = "login"),
-    url(r'^citations/', include('citations.urls')),
+    url(r'^citations/', citations),
     url(r'^$', TemplateView.as_view(template_name="signup-page.html")),
     url(r'^login_data', login_data),
+    url(r'^registration_data', registration_data),
+    url(r'^logout', logout_view),
 ]

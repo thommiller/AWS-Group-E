@@ -162,3 +162,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "..", "www"),
     os.path.join(BASE_DIR, "..", "assets"),
 ]
+
+LOGIN_URL = '/'
