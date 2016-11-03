@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Test response.")
+    return render(request, template_name = "signup-page.html")
