@@ -1,12 +1,34 @@
 from django.http import HttpResponseRedirect
-from django.db.models.loading import get_model
-from citations.models import Citation
-
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, logout
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 def login_data(request):
+		print(request.POST)
+		username = request.POST.get('email')
+		password = request.POST.get('password')
+		user = authenticate(username=username, password=password)
+		if user is not None:
+			print(user)
+			return HttpResponseRedirect('citations')
+		else:
+			print("authentication failed")
+			return HttpResponseRedirect('/')        
+
+def registration_data(request):
         print(request.POST)
+         
+        username= request.POST.get('username')
+        password= request.POST.get('password')
+        email= request.POST.get('email')
+        firstname= request.POST.get('first_name')
+        lastname= request.POST.get('last_name')
+
+        user = User.objects.create_user(username, email, password, first_name=firstname, last_name=lastname)
         return HttpResponseRedirect('/')
 
+@login_required
 def citations_data(request):
     query_results = Citation.objects.all()
     if request.method == "POST":
@@ -20,14 +42,6 @@ def citations_data(request):
         a_citation.save(force_insert=True)
     return HttpResponseRedirect('/citations')
 
-#def citation_data(request):
-#        print(request.POST)
-#        author = request.POST.get("author")
-#        title = request.POST.get("title")
-#        link = request.POST.get("link")
-##        date_pub = request.POST.get("date_pub")
-#        date_acc = request.POST.get("date_acc")
-#        note = request.POST.get("note")
-#        citation = Citation.objects.Create(author=author, title=title, link=link, date_pub=date_pub, date_acc=date_acc, note=note)
-#        print(citation)
-#        return HttpResponseRedirect('/')
+def logout_view(request):
+	logout(request)
+	return HttpResponseRedirect('/')
