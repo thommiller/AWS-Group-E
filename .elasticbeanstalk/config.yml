@@ -1,4 +1,6 @@
 branch-defaults:
+  beanstalk-deployment:
+    environment: citation-manager
   django-installation:
     environment: citation-manager-production
     group_suffix: null
