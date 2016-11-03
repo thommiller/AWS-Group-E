@@ -1,0 +1,12 @@
+{% block content %}
+
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+  
+
+  <input id="save_citation" type="submit" value="Save" />
+</form>
+
+<a href="{% url "citations" %}">back to list</a>
+
+{% endblock %}

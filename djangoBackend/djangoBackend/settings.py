@@ -78,7 +78,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'citations',
-        'USER': 'mehul',
+        'USER': 'postgres',
         'PASSWORD': 'test123',
         'HOST': '127.0.0.1',
         'PORT': '5432',
