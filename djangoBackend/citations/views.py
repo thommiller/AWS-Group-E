@@ -13,4 +13,6 @@ from django.core.urlresolvers import reverse
 #    return render(request, 'citations.html', {'obj': models.Citation.objects.all()})
 
 def citations(request):
+    if request.user.is_authenticated():
+        username = request.user.firstname
     return render(request, 'citations.html', {'obj': models.Citation.objects.all()})

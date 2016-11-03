@@ -18,7 +18,7 @@ def citations_data(request):
         notes = request.POST.get("notes")
         a_citation = Citation(author=author, title=title, link=link, date_acc=date_acc, date_pub=date_pub, notes=notes)
         a_citation.save(force_insert=True)
-        return HttpResponseRedirect('/citations')
+    return HttpResponseRedirect('/citations')
 
 #def citation_data(request):
 #        print(request.POST)
