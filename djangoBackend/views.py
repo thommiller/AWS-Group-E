@@ -6,12 +6,12 @@ from django.contrib.auth.decorators import login_required
 
 def login_data(request):
 		print(request.POST)
-		username= request.POST.get('email')
-		password= request.POST.get('password')
-		user = authenticate(username= username, password=password)
+		username = request.POST.get('email')
+		password = request.POST.get('password')
+		user = authenticate(username=username, password=password)
 		if user is not None:
 			print(user)
-			return HttpResponseRedirect('citation')
+			return HttpResponseRedirect('citations')
 		else:
 			print("authentication failed")
 			return HttpResponseRedirect('/')        
@@ -28,17 +28,25 @@ def registration_data(request):
         user = User.objects.create_user(username, email, password, first_name=firstname, last_name=lastname)
         return HttpResponseRedirect('/')
 
-@login_required
-def citations(request):
-		print('citations')
-		if request.user.is_authenticated(): print('auth')
-		return render(request, 'citations.html')
+# def citations(request):
+		# print('citations')
+		# if request.user.is_authenticated(): print('auth')
+		# return render(request, 'citations.html')
+        
+@login_required        
+def citations_data(request):
+    query_results = Citation.objects.all()
+    if request.method == "POST":
+        author = request.POST.get("author_fname")
+        title = request.POST.get("title")
+        link = request.POST.get("url")
+        date_acc = request.POST.get("date_acc")
+        date_pub = request.POST.get("date_pub")
+        notes = request.POST.get("notes")
+        a_citation = Citation(author=author, title=title, link=link, date_acc=date_acc, date_pub=date_pub, notes=notes)
+        a_citation.save(force_insert=True)
+    return HttpResponseRedirect('/citations')
 
 def logout_view(request):
 	logout(request)
 	return HttpResponseRedirect('/')
-
-
-
-
-

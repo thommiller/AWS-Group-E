@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -85,6 +85,16 @@ if 'RDS_DB_NAME' in os.environ:
             'PORT': os.environ['RDS_PORT'],
         }
     }
+    # DATABASES = {
+        # 'default': {
+            # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            # 'NAME': 'citations',
+            # 'USER': 'postgres',
+            # 'PASSWORD': 'test123',
+            # 'HOST': '127.0.0.1',
+            # 'PORT': '5432',
+        # }
+    # }
     #DATABASES = {
     #    'default': {
     #        'ENGINE': 'django.db.backends.sqlite3',
@@ -162,5 +172,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "..", "www"),
     os.path.join(BASE_DIR, "..", "assets"),
 ]
+
+#STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 LOGIN_URL = '/'
