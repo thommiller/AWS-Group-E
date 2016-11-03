@@ -27,9 +27,6 @@ def registration_data(request):
         user = User.objects.create_user(username, email, password, first_name=firstname, last_name=lastname)
         return HttpResponseRedirect('/')
 
-@login_required
-def citations(request):
-    return render(request, 'citations.html', {'obj': models.Citation.objects.all()})
 # def citations(request):
 		# print('citations')
 		# if request.user.is_authenticated(): print('auth')
