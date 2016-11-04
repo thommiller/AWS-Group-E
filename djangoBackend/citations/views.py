@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from citations.models import Citation
 
 def login_data(request):
-        username = request.POST.get('email')
+        username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
         if user is not None:
@@ -27,8 +27,6 @@ def registration_data(request):
 
 @login_required
 def citations_data(request):
-    print('citations data reached')
-    query_results = Citation.objects.all()
     if request.method == "POST":
         author_fname = request.POST.get("author_fname")
         author_lname = request.POST.get("author_lname")
@@ -48,4 +46,5 @@ def logout_view(request):
 
 @login_required
 def citations(request):
-    return render(request, 'citations.html', {'query_results': Citation.objects.all()})
+    query_results = Citation.objects.filter(user=request.user)
+    return render(request, 'citations.html', {'query_results': query_results})
