@@ -36,7 +36,8 @@ def logout_view(request):
 @login_required
 def citations(request):
     form = CitationForm()
-    return render(request, 'citations.html', {'query_results': Citation.objects.all(), "form" : form})
+    query_results = Citation.objects.filter(user=request.user)
+    return render(request, 'citations.html', {'query_results': query_results, "form" : form})
 
 @login_required
 def citations_data(request):
