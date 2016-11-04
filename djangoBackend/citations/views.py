@@ -22,7 +22,7 @@ def citations(request):
 def citations_data(request):
     query_results = Citation.objects.all()
     if request.method == "POST":
-        author = request.POST.get("author_fname") + request.POST.get("author_lname")
+        author = request.POST.get("author_fname") + " " + request.POST.get("author_lname")
         title = request.POST.get("title")
         link = request.POST.get("url")
         date_acc = request.POST.get("date_acc")
