@@ -143,12 +143,12 @@
                                     <tbody>
                                         {% for citation in query_results %}
                                         <tr>
-                                            <td>{{ item.user }}</td>
-                                            <td>{{ item.author_fname }} {{ item.author_lname }}</td>
-                                            <td>{{ item.title }}</td>
-                                            <td class="wordwrap link-cell"><a href="#">{{ item.title }}</a></td>
-                                            <td>{{ item.date_pub }}</td>
-                                            <td>{{ item.date_acc }}</td>
+                                            <td>{{ citation.user }}</td>
+                                            <td>{{ citation.author_fname }} {{ citation.author_lname }}</td>
+                                            <td>{{ citation.title }}</td>
+                                            <td class="wordwrap link-cell"><a href="#">{{ citation.link }}</a></td>
+                                            <td>{{ citation.date_pub }}</td>
+                                            <td>{{ citation.date_acc }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-info btn-fill" data-toggle="popover" data-placement="left" title="Note" data-content={{item.note}} data-html="true">View</button>
                                             </td>

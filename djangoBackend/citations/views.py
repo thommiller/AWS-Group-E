@@ -49,4 +49,4 @@ def logout_view(request):
 def citations(request):
     for obj in Citation.objects.all():
         print(obj.author)
-    return render(request, 'citations.html', {'obj': Citation.objects.all()})
+    return render(request, 'citations.html', {'query_results': Citation.objects.all()})
