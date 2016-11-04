@@ -7,7 +7,7 @@ from .forms import CitationForm
 
 
 def login_data(request):
-        username = request.POST.get('email')
+        username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
         if user is not None:
@@ -27,22 +27,7 @@ def registration_data(request):
         user = User.objects.create_user(username, email, password, first_name=firstname, last_name=lastname)
         return redirect('/')
 
-#@login_required
-#def citations_data(request):
-#    print('citations data reached')
-#    query_results = Citation.objects.all()
-#    if request.method == "POST":
-#        author_fname = request.POST.get("author_fname")
-#        author_lname = request.POST.get("author_lname")
-#        title = request.POST.get("title")
-#        link = request.POST.get("url")
-#        date_acc = request.POST.get("date_acc")
-#        date_pub = request.POST.get("date_pub")
-#        notes = request.POST.get("notes")
-#        a_citation = Citation(author_fname=author_fname, author_lname=author_lname, title=title, link=link, date_acc=date_acc, date_pub=date_pub, notes=notes)
-#        a_citation.user = get_user(request)
-#        a_citation.save(force_insert=True)
-#    return redirect('/citations')
+
 
 def logout_view(request):
     logout(request)

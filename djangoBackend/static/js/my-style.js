@@ -45,7 +45,57 @@ gsdk = {
     },
 }
 
-/*$('button[id="rowDelete"]').click(function(e){
-   window.location.href = {{% url 'deleteEntry' citation.id %}"}
-})
-*/
+$(".form-control").keyup(function () {
+    //split the current value of searchInput
+    var data = this.value.split(" ");
+    //create a jquery object of the rows
+    var jo = $(".content").find("tr");
+    if (this.value == "") {
+        jo.show();
+        return;
+    }
+    //hide all the rows
+    jo.hide();
+
+    //Recusively filter the jquery object to get results.
+    jo.filter(function (i, v) {
+        var $t = $(this);
+        for (var d = 0; d < data.length; ++d) {
+            if ($t.is(":contains('" + data[d] + "')")) {
+                return true;
+            }
+        }
+        return false;
+    })
+    //show the rows that match.
+    .show();
+}).focus(function () {
+    this.value = "";
+    $(this).css({
+        "color": "black"
+    });
+    $(this).unbind('focus');
+}).css({
+    "color": "#C0C0C0"
+});
+
+
+
+function validate(){
+  var pass1 = document.getElementById("password").value
+  var pass2 = document.getElementById("password_confirmation").value
+   if( pass1 != pass2 ){
+      alert( "Passwords don't match!" );
+      document.getElementById("password").focus();
+      return false;
+   }
+   var inputs = document.forms["registration_form"].getElementsByTagName("input");
+   for(var i=0; i<inputs.length; i++) {
+     if(!inputs[i].value) {
+       alert("Empty fields not allowed");
+       return false;
+     }
+   }
+   return( true );
+}
+
