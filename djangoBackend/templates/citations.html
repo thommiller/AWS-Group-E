@@ -31,33 +31,6 @@
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
-
-    	<div class="sidebar-wrapper">
-            <div class="logo">
-                <a class="simple-text">
-                    Your Manager
-                </a>
-            </div>
-
-            <ul class="nav">
-                <li class="active">
-                    <a href="dashboard.html">
-                        <i class="pe-7s-graph"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li class="active">
-                <a href="/citations">
-                        <i class="pe-7s-note2"></i>
-                        <p>Citations</p>
-                    </a>
-                </li>
-
-            </ul>
-    	</div>
-    </div>
-
     <div class="main-panel">
         <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
@@ -139,10 +112,6 @@
                                                 <button type="button" class="btn btn-info btn-fill" data-toggle="popover" data-placement="left" title="Note" data-content="{{citation.notes}}" data-html="true">View</button>
                                             </td>
                                             <td class="td-actions text-right">
-
-                                                    <button type="button" rel="tooltip" title="Edit Citation" class="btn btn-info btn-simple btn-xs" data-toggle="modal" data-target="#EditCitaion">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
                                                     <button onclick="window.location.href = '{% url 'deleteEntry' citation.id %}'" type="button" id="rowDelete" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
 
                                                         <i class="fa fa-times"></i>
