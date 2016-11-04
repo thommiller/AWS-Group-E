@@ -16,7 +16,6 @@ def login_data(request):
             return redirect('/')        
 
 def registration_data(request):
-         
         username= request.POST.get('username')
         password= request.POST.get('password')
         email= request.POST.get('email')
@@ -31,13 +30,14 @@ def citations_data(request):
     print('citations data reached')
     query_results = Citation.objects.all()
     if request.method == "POST":
-        author = request.POST.get("author_fname")
+        author_fname = request.POST.get("author_fname")
+        author_lname = request.POST.get("author_lname")
         title = request.POST.get("title")
         link = request.POST.get("url")
         date_acc = request.POST.get("date_acc")
         date_pub = request.POST.get("date_pub")
         notes = request.POST.get("notes")
-        a_citation = Citation(author=author, title=title, link=link, date_acc=date_acc, date_pub=date_pub, notes=notes)
+        a_citation = Citation(author_fname=author_fname, author_lname=author_lname, title=title, link=link, date_acc=date_acc, date_pub=date_pub, notes=notes)
         a_citation.user = get_user(request)
         a_citation.save(force_insert=True)
     return redirect('/citations')
@@ -46,7 +46,6 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
+@login_required
 def citations(request):
-    for obj in Citation.objects.all():
-        print(obj.author)
     return render(request, 'citations.html', {'query_results': Citation.objects.all()})

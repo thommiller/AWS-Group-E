@@ -5,13 +5,10 @@ from django.contrib.auth.models import User
 
 DATE_FORMATS = ['%d/%m/%Y',]
 
-# class User(models.Model):
-#     name = models.CharField(max_length = 32)
-#     passwordHash = models.CharField(max_length = 1024)
-
 class Citation(models.Model):
     user = models.ForeignKey(User)
-    author = models.CharField(max_length = 256, default = '0000000')
+    author_fname = models.CharField(max_length = 128, default = '0000000')
+    author_lname = models.CharField(max_length = 128, default = '0000000')
     title = models.CharField(max_length = 256, default = '0000000')
     link = models.CharField(max_length = 1024, default = '0000000')
     notes = models.CharField(max_length = 65536, default = '0000000')
