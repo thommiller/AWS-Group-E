@@ -82,3 +82,21 @@ $(".form-control").keyup(function () {
 $('button[id="rowDelete"]').click(function(e){
    $(this).closest('tr').remove()
 })
+
+function validate(){
+  var pass1 = document.getElementById("password").value
+  var pass2 = document.getElementById("password_confirmation").value
+   if( pass1 != pass2 ){
+      alert( "Passwords don't match!" );
+      document.getElementById("password").focus();
+      return false;
+   }
+   var inputs = document.forms["registration_form"].getElementsByTagName("input");
+   for(var i=0; i<inputs.length; i++) {
+     if(!inputs[i].value) {
+       alert("Empty fields not allowed");
+       return false;
+     }
+   }
+   return( true );
+}
