@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, logout, login, get_user
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from citations.models import Citation
+from .forms import CitationForm
+
 
 def login_data(request):
         username = request.POST.get('email')
@@ -25,22 +27,22 @@ def registration_data(request):
         user = User.objects.create_user(username, email, password, first_name=firstname, last_name=lastname)
         return redirect('/')
 
-@login_required
-def citations_data(request):
-    print('citations data reached')
-    query_results = Citation.objects.all()
-    if request.method == "POST":
-        author_fname = request.POST.get("author_fname")
-        author_lname = request.POST.get("author_lname")
-        title = request.POST.get("title")
-        link = request.POST.get("url")
-        date_acc = request.POST.get("date_acc")
-        date_pub = request.POST.get("date_pub")
-        notes = request.POST.get("notes")
-        a_citation = Citation(author_fname=author_fname, author_lname=author_lname, title=title, link=link, date_acc=date_acc, date_pub=date_pub, notes=notes)
-        a_citation.user = get_user(request)
-        a_citation.save(force_insert=True)
-    return redirect('/citations')
+#@login_required
+#def citations_data(request):
+#    print('citations data reached')
+#    query_results = Citation.objects.all()
+#    if request.method == "POST":
+#        author_fname = request.POST.get("author_fname")
+#        author_lname = request.POST.get("author_lname")
+#        title = request.POST.get("title")
+#        link = request.POST.get("url")
+#        date_acc = request.POST.get("date_acc")
+#        date_pub = request.POST.get("date_pub")
+#        notes = request.POST.get("notes")
+#        a_citation = Citation(author_fname=author_fname, author_lname=author_lname, title=title, link=link, date_acc=date_acc, date_pub=date_pub, notes=notes)
+#        a_citation.user = get_user(request)
+#        a_citation.save(force_insert=True)
+#    return redirect('/citations')
 
 def logout_view(request):
     logout(request)
@@ -48,4 +50,26 @@ def logout_view(request):
 
 @login_required
 def citations(request):
-    return render(request, 'citations.html', {'query_results': Citation.objects.all()})
+    form = CitationForm()
+    return render(request, 'citations.html', {'query_results': Citation.objects.all(), "form" : form})
+
+@login_required
+def citations_data(request):
+    if request.method == "POST":
+        form = CitationForm(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user = request.user
+            data.save()
+        return redirect('/citations')
+    else:
+        form = CitationForm()
+
+
+def deleteEntry(request, id):
+    print("work")
+    thingy = Citation.objects.get(pk = id)
+    thingy.delete()
+    return redirect('/citations')
+
+

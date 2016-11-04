@@ -153,10 +153,10 @@
                                                 <button type="button" class="btn btn-info btn-fill" data-toggle="popover" data-placement="left" title="Note" data-content="{{citation.notes}}" data-html="true">View</button>
                                             </td>
                                             <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Citation" class="btn btn-info btn-simple btn-xs" data-toggle="modal" data-target="#NewCitaion">
+                                                    <button type="button" rel="tooltip" title="Edit Citation" class="btn btn-info btn-simple btn-xs" data-toggle="modal" data-target="#EditCitaion">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
-                                                    <button type="button" id="rowDelete" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                    <button onclick="window.location.href = '{% url 'deleteEntry' citation.id %}'" type="button" id="rowDelete" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
                                                         <i class="fa fa-times"></i>
                                                     </button>
                                                 </td>
@@ -205,57 +205,59 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="content">
+                        {{ form.non_field_errors }}
                         <form method="post" action="/citations_data">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>First Name of Author</label>
-                                        <input type="text" class="form-control" placeholder="First Name(s)" value="" name="author_fname">
+                                        <label for = "{{ form.author_fname.id_for_label }}">{{form.author_fname.label_tag}}</label>
+                                        {{ form.author_fname }}
+                                        {{ form.author_fname.errors }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Last Name of Author</label>
-                                        <input type="text" class="form-control" placeholder="Last Name" value="" name="author_lname">
+                                        <label for = "{{ form.author_lname.id_for_label }}">Lastname</label>
+                                        {{ form.author_lname }}                                   
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Title of Entry</label>
-                                        <input type="text" class="form-control" placeholder="Title of Content" value="" name="title">
+                                        <label for="{{ form.title.id_for_label }}">Title</label>
+                                        {{ form.title }}
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>URL (i.e. Website Address)</label>
-                                        <input type="text" class="form-control" placeholder="URL (Website Address)" value="" name="url">
+                                        <label for="{{ form.link.id_for_label }}">Link</label>
+                                        {{ form.link}}
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Date Published</label>
-                                        <input type="date" class="form-control" name="date_pub">
+                                        <label for="{{ form.date_pub.id_for_label }}">Date Published</label>
+                                        {{ form.date_pub}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Date Accessed/Viewed</label>
-                                        <input type="date" class="form-control" max="2016-11-01" value="" name="date_acc">
+                                        <label for="{{ form.date_accc.id_for_label }}">Date Accessed</label>
+                                        {{ form.date_acc}}
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Notes</label>
-                                        <textarea rows="5" class="form-control" placeholder="Add Some Notes" name="notes"></textarea>
+                                        <label for = "{{form.id_for_label }}">Notes</label>
+                                        {{ form.notes }}
                                     </div>
                                 </div>
                             </div>
@@ -270,6 +272,8 @@
 </div>
 
 <!--    end modal -->
+
+<!-- modal for editing -->
 
 
 <!-- Modal -->

@@ -45,6 +45,7 @@ gsdk = {
     },
 }
 
-$('button[id="rowDelete"]').click(function(e){
-   $(this).closest('tr').remove()
+/*$('button[id="rowDelete"]').click(function(e){
+   window.location.href = {{% url 'deleteEntry' citation.id %}"}
 })
+*/
