@@ -27,6 +27,7 @@ def registration_data(request):
 
 @login_required
 def citations_data(request):
+    today = date.today().strftime('%Y-%m-%d')
     if request.method == "POST":
         author_fname = request.POST.get("author_fname")
         author_lname = request.POST.get("author_lname")
@@ -34,11 +35,16 @@ def citations_data(request):
         link = request.POST.get("url")
         date_acc = request.POST.get("date_acc")
         date_pub = request.POST.get("date_pub")
+        if(not date_acc):
+            date_acc = today
+        if(not date_pub):
+            date_pub = today
         notes = request.POST.get("notes")
         a_citation = Citation(author_fname=author_fname, author_lname=author_lname, title=title, link=link, date_acc=date_acc, date_pub=date_pub, notes=notes)
         a_citation.user = get_user(request)
         a_citation.save(force_insert=True)
     return redirect('/citations')
+
 
 def logout_view(request):
     logout(request)
