@@ -31,20 +31,6 @@ def registration_data(request):
 		# print('citations')
 		# if request.user.is_authenticated(): print('auth')
 		# return render(request, 'citations.html')
-        
-@login_required        
-def citations_data(request):
-    query_results = Citation.objects.all()
-    if request.method == "POST":
-        author = request.POST.get("author_fname")
-        title = request.POST.get("title")
-        link = request.POST.get("url")
-        date_acc = request.POST.get("date_acc")
-        date_pub = request.POST.get("date_pub")
-        notes = request.POST.get("notes")
-        a_citation = Citation(author=author, title=title, link=link, date_acc=date_acc, date_pub=date_pub, notes=notes)
-        a_citation.save(force_insert=True)
-    return HttpResponseRedirect('/citations')
 
 def logout_view(request):
 	logout(request)

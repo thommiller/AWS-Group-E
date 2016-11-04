@@ -1,14 +1,15 @@
 from django.db import models
 from django import forms
 from django.forms.fields import DateField
+from django.contrib.auth.models import User
 
 
 DATE_FORMATS = ['%d/%m/%Y',]
 
 
-class User(models.Model):
-    name = models.CharField(max_length = 32)
-    passwordHash = models.CharField(max_length = 1024)
+#class User(models.Model):
+#    name = models.CharField(max_length = 32)
+#    passwordHash = models.CharField(max_length = 1024)
 
 class Citation(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)

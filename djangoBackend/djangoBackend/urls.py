@@ -17,7 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
 #from views import login_data, registration_data, citations, logout_view
-from views import login_data, registration_data, logout_view, citations_data
+from views import login_data, registration_data, logout_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^login_data', login_data),
     url(r'^registration_data', registration_data),
     url(r'^logout', logout_view),
-    url(r'^citations_data', citations_data, name='citations_data'),
+    url(r'^', include('citations.urls')),
 ]

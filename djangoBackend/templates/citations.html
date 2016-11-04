@@ -92,7 +92,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    Hey, {{ username }}!
+                                    Hey, {{ user.get_username }}!
                                     <b class="caret"></b>
                               </a>
                               <ul class="dropdown-menu">
@@ -143,14 +143,14 @@
                                     <tbody>
                                         {% for citation in query_results %}
                                         <tr>
-                                            <td>{{ item.user }}</td>
-                                            <td>{{ item.author_fname }} {{ item.author_lname }}</td>
-                                            <td>{{ item.title }}</td>
-                                            <td class="wordwrap link-cell"><a href="#">{{ item.title }}</a></td>
-                                            <td>{{ item.date_pub }}</td>
-                                            <td>{{ item.date_acc }}</td>
+                                            <td>{{ citation.user }}</td>
+                                            <td>{{ citation.author }}</td>
+                                            <td>{{ citation.title }}</td>
+                                            <td class="wordwrap link-cell"><a href="#">{{ citation.title }}</a></td>
+                                            <td>{{ citation.date_pub }}</td>
+                                            <td>{{ citation.date_acc }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-info btn-fill" data-toggle="popover" data-placement="left" title="Note" data-content={{item.note}} data-html="true">View</button>
+                                                <button type="button" class="btn btn-info btn-fill" data-toggle="popover" data-placement="left" title="Note" data-content={{citation.note}} data-html="true">View</button>
                                             </td>
                                             <td class="td-actions text-right">
                                                     <button type="button" rel="tooltip" title="Edit Citation" class="btn btn-info btn-simple btn-xs" data-toggle="modal" data-target="#NewCitaion">
